@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>tong-h: canvas图片裁剪</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      img{
+        position: absolute;
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="input" name="avatar" accept="image/png, image/jpeg">
+    <img src="" id="img">
+    <canvas id="canvas" onmousedown="down(event)" onmouseup="up(event)" onmousemove="move(event)"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas") 
+      const context = canvas.getContext("2d")
+      canvas.width = document.body.clientWidth
+      canvas.height = document.body.clientHeight
+      const input = document.getElementById("input")
+      const img = document.getElementById("img")
+
+      const shotcanvas = document.createElement('canvas') // 裁剪出来的图片
+      const shotcontext = shotcanvas.getContext("2d")
+      
+      let [downPoint, imgdata] = [{}, {}]
+
+      input.addEventListener('change', choose)
+      function choose(e){
+        let data = e.target.files[0]
+        if (data) {
+          let newimg = new Image
+          newimg.src = window.URL.createObjectURL(data)
+          context.beginPath()
+          newimg.onload = function () {
+            let width = newimg.width < document.body.clientWidth ? newimg.width : document.body.clientWidth
+            let height = newimg.height < document.body.clientHeight ? newimg.height : document.body.clientHeight
+            context.drawImage(newimg, 0, 0, width, height) // 将图片渲染到canvas
+            imgdata = context.getImageData(0, 0, canvas.width, canvas.height)   // 保存当前状态
+            context.stroke()
+          }
+        }
+      }
+      function down(e) {
+        downPoint = { // 裁剪的起始点
+          x: e.clientX,
+          y: e.clientY
+        } 
+      }
+      function move(e) {
+        if (downPoint.x) {
+          context.clearRect(0, 0, canvas.width, canvas.height)
+          context.putImageData(imgdata, 0, 0)
+          context.beginPath()
+          context.strokeRect(downPoint.x, downPoint.y, e.clientX - downPoint.x, e.clientY - downPoint.y)
+          context.stroke()
+        }
+      }
+      function up(e) {
+        let [width, height] = [e.clientX - downPoint.x, e.clientY - downPoint.y]
+        let shotdata = context.getImageData(downPoint.x, downPoint.y, width, height)
+        downPoint = {}
+        
+        shotcontext.clearRect(0, 0, canvas.width, canvas.height)
+        shotcanvas.width = width
+        shotcanvas.height = height
+        shotcontext.putImageData(shotdata, 0, 0)
+
+        img.src = shotcanvas.toDataURL()
+      }
+    </script>
+  </body>
+</html>
