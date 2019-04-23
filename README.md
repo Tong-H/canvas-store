@@ -1,8 +1,8 @@
 # canvas-animate
 用canvas写的一些小东西，不断更新中....  </br>
 [文字粒子效果](https://tong-h.github.io/canvas-store/fontparticle/index.html)
+[博客文章](https://tong-h.github.io/2019/04/23/canvas-fontparticle/#more)
 ![示例图片](https://tong-h.github.io/canvas-store/fontparticle/img.png)
-[教程文章](https://tong-h.github.io/2019/04/23/canvas-fontparticle/#more)
 
 [粒子动画](https://tong-h.github.io/canvas-store/particle/index.html)
 ![示例图片](https://tong-h.github.io/canvas-store/particle/img.png)
