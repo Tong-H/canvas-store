@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="input" accept="image/png, image/jpeg">
+    格式：宽x高,宽x高 逗号分隔<input type="text" id="px">
+    <button onclick="generate()">OK</button><br>
+    <img src="" id="img">
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas")
+        const context = canvas.getContext("2d")
+        const input = document.getElementById("input")
+        const px = document.getElementById("px")
+        const img = document.getElementById("img")
+        const newimg = new Image
+        input.addEventListener('change', choose)
+        function choose(e) {
+            let data = e.target.files[0]
+            if (data) {
+                newimg.src = window.URL.createObjectURL(data)
+                img.src = window.URL.createObjectURL(data)
+            }
+        }
+        function generate() {
+            if (px.value && newimg.src) {
+                let size = px.value.split(',')
+                size.forEach(element => {
+                    element = element.split('x')
+                    canvas.width = element[0]
+                    canvas.height =  element[1]
+                    context.beginPath()
+                    context.drawImage(newimg, 0, 0, element[0],  element[1])
+                    let a = document.createElement('a')
+                    a.setAttribute('download', `${element[0]}x${ element[1]}`)
+                    a.setAttribute('href', canvas.toDataURL())
+                    a.click()
+                })
+            }
+        }
+    </script>
+</body>
+</html>
