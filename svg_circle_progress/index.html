@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	</head>
+	<body style="background: #0f1922">
+		<svg viewBox="0 0 140 140" width="140" height="140">
+			<defs>
+				<linearGradient id="gradient">
+					<stop offset="0%" stop-color="#10a5ff" />
+					<stop offset="50%" stop-color="#03c6fd" />
+					<stop offset="95%" stop-color="#11ffe4" />
+				</linearGradient>
+				<filter id="shadow" width="150%" height="150%" x="-25%" y="-25%">
+					<feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+					<feBlend in="SourceGraphic"  mode="normal" />
+				</filter>
+			</defs>
+			<circle cx="50%" cy="50%" r="44" fill="none" stroke="#fff" stroke-width="8"></circle>
+			<circle
+				cx="50%"
+				cy="50%"
+				r="44"
+				fill="none"
+				transform="rotate(-90 70 70)"
+				stroke="url(#gradient)"
+				filter="url(#shadow)"
+				stroke-linecap="round"
+				stroke-width="8"
+				stroke-dasharray="276"
+				stroke-dashoffset="276"
+			>
+				<animate id="progress" attributeName="stroke-dashoffset" attributeType="XML" from="276" to="0" dur="2s" fill="freeze"></animate>
+			</circle>
+			<text x="50%" y="50%" dx="-8" dy="5" fill="#fff" id="number">0%</text>
+		</svg>
+		<script>
+			;(function dataChange(_val = 0) {
+				const number = document.getElementById("number")
+				number.attributes.dx.nodeValue = (_val.toString().length * 3 + 8) * -1
+				number.innerHTML = Number.parseInt(_val) + "%"
+				_val < 100 &&
+					setTimeout(() => {
+						dataChange(_val + 5)
+					}, 100)
+			})()
+		</script>
+	</body>
+</html>
