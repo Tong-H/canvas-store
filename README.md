@@ -11,17 +11,17 @@
 
 * [a brawing board](https://tong-h.github.io/canvas-store/draw/index.html), you can draw and save a photo about your work
 
-* https://tong-h.github.io/canvas-store/imgcut/index.html is used to cut out a part of a photo
+* <a>https://tong-h.github.io/canvas-store/imgcut/index.html</a> is used to cut out a part of a photo
 
-* https://tong-h.github.io/canvas-store/imgsize/index.html can generate images of different size at once
+* <a>https://tong-h.github.io/canvas-store/imgsize/index.html</a> can generate images of different size at once
 
 * a round animation diaplays the changes according to percentage.
-canvas version: https://tong-h.github.io/canvas-store/roundPercent/index.html
-svg version: https://tong-h.github.io/canvas-store/roundPercent/index.html
+canvas version: <a>https://tong-h.github.io/canvas-store/roundPercent/index.html</a>
+svg version: <a>https://tong-h.github.io/canvas-store/roundPercent/index.html</a>
 
 * a path animation which is made by svg, I've used in the home page of my blog.
-https://tong-h.github.io/canvas-store/roundPercent/index.html
-blog: https://tong-h.github.io/2021/12/13/svg-1/
+<a>https://tong-h.github.io/canvas-store/roundPercent/index.html</a>
+blog: <a>https://tong-h.github.io/2021/12/13/svg-1/</a>
 
 ## others
 
