@@ -9,30 +9,52 @@
 	<body style="background: #ffac00">
 		<svg width="600" height="90">
 			<defs>
-				<text id="welcome"> HELLO,WORLD  </text>
+				<text id="welcome"> HELLO, YHNK-O  </text>
+				<linearGradient id="gradient" gradientTransform="rotate(0)" x1="0" y1="0" x2="500%" y2="0" >
+					<animate attributeType="XML" id="first" attributeName="x2" from="0%" to="200%" dur="4s" repeatCount="indefinite" keyPoints=”0;1;0“></animate>
+					<!-- <animate attributeType="XML" id="second" attributeName="x2" from="100%" to="0" dur="1s" repeatCount="indefinite" begin="first.end"></animate> -->
+					<stop offset="0%" stop-color="#f11010" />
+					<stop offset="50%" stop-color="#f11010" />
+					<stop offset="50%" stop-color="#fff" />
+					<stop offset="100%" stop-color="#fff" />
+					<!-- <stop offset="0%" stop-color="#f11010" />
+					<stop offset="20%" stop-color="#f11010" />
+					<stop offset="20%" stop-color="#fff" />
+					<stop offset="40%" stop-color="#fff" />
+					<stop offset="40%" stop-color="red" />
+					<stop offset="60%" stop-color="red" />
+					<stop offset="60%" stop-color="#b40b0b" />
+					<stop offset="80%" stop-color="#b40b0b" />
+					<stop offset="80%" stop-color="#ff4c94" />
+					<stop offset="100%" stop-color="#ff4c94	" /> -->
+				</linearGradient>
+				<!-- <filter id="shadow" width="150%" height="150%" x="-25%" y="-25%">
+					<feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+					<feBlend in="SourceGraphic"  mode="normal" />
+				</filter> -->
 			</defs>
 			<style>
 				text {
 					font-family: sans-serif;
-					font-weight: bold;
-					font-size: 80px;
+					font-weight: normal;
+					font-size: 14px;
 					stroke-width: 2;
-					fill: none;
 					stroke-linecap: square;
 				}
 			</style>
-			<use href="#welcome" x="2" y="70" stroke="#fff" stroke-dasharray="35, 105">
+			<use href="#welcome" x="2" y="70" fill="url(#gradient)">
+				<!-- <animate attributeType="XML" attributeName="stroke-dashoffset" from="0" to="140" dur="4s" repeatCount="indefinite"></animate> -->
+			</use>
+			<!-- <use href="#welcome" x="2" y="70" stroke="#f11010" stroke-dasharray="0 35 35 70">
 				<animate attributeType="XML" attributeName="stroke-dashoffset" from="0" to="140" dur="4s" repeatCount="indefinite"></animate>
 			</use>
-			<use href="#welcome" x="2" y="70" stroke="#f11010" stroke-dasharray="0 35 35 70">
-				<animate attributeType="XML" attributeName="stroke-dashoffset" from="0" to="140" dur="4s" repeatCount="indefinite"></animate>
-			</use>
-			<use href="#welcome" x="2" y="70" stroke="#b40b0b" stroke-dasharray="0 70 35 35">
+			<use href="#welcome" x="2" y="70" fill="#b40b0b" stroke-dasharray="0 70 35 35">
 				<animate attributeType="XML" attributeName="stroke-dashoffset" from="0" to="140" dur="4s" repeatCount="indefinite"></animate>
 			</use>
 			<use href="#welcome" x="2" y="70" stroke="#ff4c94" stroke-dasharray="0 105 35 0">
 				<animate attributeType="XML" attributeName="stroke-dashoffset" from="0" to="140" dur="4s" repeatCount="indefinite"></animate>
-			</use>
+			</use> -->
 		</svg>
+		<div style="width: 40px;height:40px;background:red;"></div>
 	</body>
 </html>
