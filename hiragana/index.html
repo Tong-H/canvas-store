@@ -1,0 +1,98 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #item {
+            margin-top: 10vh;
+            font-size: 100px;
+            cursor: pointer;
+        }
+        #pronounce {
+            margin-top: 10vh;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="switcher(0)">hiragana</button>
+    <button onclick="switcher(1)">katakana</button>
+    <p>
+        click the hiragana or katakana button, you can hide or show hiragana/katakana <br>
+        click the main content to the next word
+    </p>
+    <div id="pronounce">pronounce</div>
+    <div id="item">start</div>
+    <script>
+        const hiragana =  ['あ  ア', 'い  イ', 'う  ウ', 'え  エ', 'お  オ', 
+                        'か  カ', 'き  キ', 'く  ク', 'け  ケ', 'こ  コ', 
+                        'さ  サ', 'し  シ', 'す  ス', 'せ  セ', 'そ  ソ', 
+                        'た  タ', 'ち  チ', 'つ  ツ', 'て  テ', 'と  ト',
+                        'な  ナ', 'に  ニ', 'ぬ  ヌ', 'ね  ネ', 'の  ノ', 
+                        'は  ハ', 'ひ  ヒ', 'ふ  フ', 'へ  ヘ', 'ほ  ホ',
+                        'ま  マ', 'み  ミ', 'む  ム', 'め  メ', 'も  モ',
+                        'や  ヤ', 'ゆ  ユ', 'よ  ヨ', 
+                        'ら  ラ', 'り  リ', 'る  ル', 'れ  レ', 'ろ  ロ', 
+                        'わ  ワ', 'を  ヲ', 'ん  ン',
+                        'が  ガ', 'ぎ  ギ', 'ぐ  グ', 'げ  ゲ', 'ご  ゴ',
+                        'ざ  ザ', 'じ  ジ', 'ず  ズ', 'ぜ  ゼ', 'ぞ ゾ',
+                        'だ  ダ', 'ぢ  ヂ', 'づ  ヅ', 'で  デ', 'ど  ド',
+                        'ば  バ', 'び  ビ', 'ぶ  ブ', 'べ  ベ', 'ぼ  ボ',
+                        'ぱ  パ', 'ぴ  ピ', 'ぷ  プ', 'ぺ  ペ', 'ぽ  ペ' ]
+        const katakana =  ['ア', 'イ', 'ウ', 'エ', 'オ', 
+                        'カ', 'キ', 'ク', 'ケ', 'コ', 
+                        'サ', 'シ', 'ス', 'セ', 'ソ', 
+                        'タ', 'チ', 'ツ', 'テ', 'ト',
+                        'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 
+                        'ハ', 'ヒ', 'フ', 'ヘ', 'ホ',
+                        'マ', 'ミ', 'ム', 'メ', 'モ',
+                        'ヤ', 'ユ', 'ヨ', 
+                        'ラ', 'リ', 'ル', 'レ', 'ロ', 
+                        'ワ', 'ヲ', 'ン',
+                        'ガ', 'ギ', 'グ', 'ゲ', 'ゴ',
+                        'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ',
+                        'ダ', 'ヂ', 'ヅ', 'デ', 'ド',
+                        'バ', 'ビ', 'ブ', 'ベ', 'ボ',
+                        'パ', 'ピ', 'プ', 'ペ', 'ペ' ]
+        const pronounce = ['a', 'i', 'u', 'e', 'o', 
+                        'ka', 'ki', 'ku', 'ke', 'ko', 
+                        'sa', 'shi', 'su', 'se', 'so', 
+                        'ta', 'chi', 'tsu', 'te', 'to',
+                        'na', 'ni', 'nu', 'ne', 'no', 
+                        'ha', 'hi', 'fu', 'he', 'ho',
+                        'ma', 'mi', 'mu', 'me', 'mo',
+                        'ya', 'yu', 'yo', 
+                        'ra', 'ri', 'ru', 're', 'ro', 
+                        'wa', 'wo', 'n',
+                        'ga', 'gi', 'gu', 'ge', 'go',
+                        'za', 'ji', 'zu', 'ze', 'zo',
+                        'da', 'ji', 'zu', 'de', 'do',
+                        'ba', 'ba', 'bu', 'ba', 'bo',
+                        'pa', 'pi', 'pu', 'pe', 'po' ]
+        let type = -1, content = ""
+        window.onload = () => {
+            const item = document.getElementById('item')
+            item.addEventListener('click', () => {
+                let random = Math.floor(Math.random() * 72)
+                document.getElementById('pronounce').innerText = pronounce[random]
+                content = hiragana[random]
+                item.innerText = type == -1 ? content : content.split("  ")[type]
+            })
+            document.addEventListener('keydown', e => e.keyCode === 13 ? item.click() : '')
+            item.click()
+        }
+         function switcher (_t) {
+            type = Number.parseInt(_t)
+            item.innerText = type == -1 ? content : content.split("  ")[type]
+         }
+    </script>
+</body>
+</html>
