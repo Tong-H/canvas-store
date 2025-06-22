@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>tong-h: canvas</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
+			}
+			img {
+				position: absolute;
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="file" id="input" name="avatar" accept="image/png, image/jpeg" />
+		<img src="" id="img" />
+		<canvas id="canvas"></canvas>
+		<script>
+			const canvas = document.getElementById("canvas")
+			const context = canvas.getContext("2d")
+			const input = document.getElementById("input")
+			const img = document.getElementById("img")
+
+			const shotcanvas = document.createElement("canvas")
+			const shotcontext = shotcanvas.getContext("2d")
+
+			input.addEventListener("change", choose)
+			function choose(e) {
+				let data = e.target.files[0]
+				if (data) {
+					let newimg = new Image()
+					newimg.src = window.URL.createObjectURL(data)
+					newimg.onload = function () {
+						canvas.width = newimg.width
+						canvas.height = newimg.height
+						context.drawImage(newimg, 0, 0, newimg.width, newimg.height)
+						canvas.toBlob(
+							(blob) => {
+								let a = document.createElement("a")
+								a.setAttribute("download", `image`)
+								a.setAttribute("href", window.URL.createObjectURL(blob))
+								a.click()
+							},
+							"image/gif", 0.1)
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
